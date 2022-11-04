@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VR Classroom</title>
+    <meta name="description" content="Virtual Classroom" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: lightblue">
+      <a-assets>
+        <!--All from Google Poly :-) -->
+        <a-asset-item
+          id="blackboard-gltf"
+          src="https://dinotoju.github.io/blackboard/Blackboard.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="teacher-gltf"
+          src="https://dinotoju.github.io/teacher/Teacher_01.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="table-gltf"
+          src="https://dinotoju.github.io/table/Table_Large_Rectangular_01.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="pencil-gltf"
+          src="https://dinotoju.github.io/pencil/Pencil_01.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="notebook-gltf"
+          src="https://dinotoju.github.io/notebook/model.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="student-gltf"
+          src="https://dinotoju.github.io/student/model.gltf"
+        ></a-asset-item>
+        <!-- VR Guys by Don Carson [CC-BY] -->
+        <!-- <a-asset-item
+        id="randomguys-obj"
+        src="MaleLow.obj"
+      ></a-asset-item> -->
+      </a-assets>
+
+      <a-sky color="lightblue"></a-sky>
+
+
+      <!-- <a-entity
+        obj-model="#randomguys-obj"
+        id="guys"
+        position="0 9.6 -10"
+        rotation="0 0 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity> -->
+
+      <a-entity
+        gltf-model="#blackboard-gltf"
+        id="blackboard"
+        position="0 4.6 -10"
+        rotation="0 0 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity>
+      <a-entity
+        gltf-model="#teacher-gltf"
+        id="teacher"
+        position="0 0 -5"
+        rotation="0 0 0"
+        scale=".15 .15 .15"
+        event-set__enter="_event: mouseenter; _target: #teacherText; visible: true"
+        event-set__leave="_event: mouseleave; _target: #teacherText; visible: false"
+        shadow
+      >
+        <a-text
+          id="teacherText"
+          value="Today we will be talking about VR"
+          align="center"
+          color="black"
+          visible="false"
+          position="0 15 -5"
+          width="50"
+          scale=".5 .5 .5"
+        ></a-text>
+      </a-entity>
+      <a-entity
+        gltf-model="#dinosaur-gltf"
+        id="largeDinosaur"
+        position="3.5 0 -8"
+        rotation="0 0 0"
+        scale=".01 .01 .01"
+        event-set__enter="_event: mouseenter; _target: #largeDinosaur; scale: .02 .02 .02"
+        event-set__leave="_event: mouseleave; _target: #largeDinosaur; scale: .01 .01 .01"
+        shadow
+      ></a-entity>
+      <a-entity
+        gltf-model="#table-gltf"
+        id="table"
+        position="0 .5 -.9"
+        rotation="0 90 0"
+        scale=".05 .05 .05"
+        shadow
+      >
+        <a-entity
+          gltf-model="#dinosaur-gltf"
+          id="smallDinosaur"
+          position="2 7.5 6"
+          rotation="0 -60 0"
+          scale=".01 .01 .01"
+          event-set__enter="_event: mouseenter; _target: #smallDinosaur; scale: .02 .02 .02"
+          event-set__leave="_event: mouseleave; _target: #smallDinosaur; scale: .01 .01 .01"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#pencil-gltf"
+          id="pencil"
+          position="-1 8 4"
+          rotation="0 -90 0"
+          scale=".5 .7 .5"
+          event-set__enter="_event: mousedown; _target: #pencil; rotation: 90 -90 0; position: -1 11 4"
+          event-set__leave="_event: mouseup; _target: #pencil; rotation: 0 -90 0; position: -1 8 4"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#notebook-gltf"
+          id="notebook"
+          position="-3 -1.5 -2"
+          rotation="0 -90 0"
+          scale="5 5 5"
+        ></a-entity>
+      </a-entity>
+
+      <a-entity
+        gltf-model="#table-gltf"
+        id="tableRight"
+        position="1.25 .5 -.9"
+        rotation="0 90 0"
+        scale=".05 .05 .05"
+        shadow
+      >
+        <a-entity
+          gltf-model="#dinosaur-gltf"
+          id="smallDinosaurRight"
+          position="2 7.5 6"
+          rotation="0 -60 0"
+          scale=".01 .01 .01"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#pencil-gltf"
+          id="pencilRight"
+          position="-1 8 4"
+          rotation="0 -90 0"
+          scale=".5 .7 .5"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#notebook-gltf"
+          id="notebookRight"
+          position="-3 -1.5 -2"
+          rotation="0 -90 0"
+          scale="5 5 5"
+        ></a-entity>
+      </a-entity>
+      
+                    <a-entity
+        gltf-model="#student-gltf"
+        id="studentRight"
+        position="7.5 -5.2 .35"
+        rotation="0 180 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity>
+
+      <a-entity
+        gltf-model="#table-gltf"
+        id="tableLeft"
+        position="-1.25 .5 -.9"
+        rotation="0 90 0"
+        scale=".05 .05 .05"
+        shadow
+      >
+        <a-entity
+          gltf-model="#dinosaur-gltf"
+          id="smallDinosaurLeft"
+          position="2 7.5 6"
+          rotation="0 -60 0"
+          scale=".01 .01 .01"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#pencil-gltf"
+          id="pencilLeft"
+          position="-1 8 4"
+          rotation="0 -90 0"
+          scale=".5 .7 .5"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#notebook-gltf"
+          id="notebookLeft"
+          position="-3 -1.5 -2"
+          rotation="0 -90 0"
+          scale="5 5 5"
+        ></a-entity>
+      </a-entity>
+      
+      <a-entity
+        gltf-model="#student-gltf"
+        id="studentLeft"
+        position="5 -5.2 .35"
+        rotation="0 180 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity>
+
+      <a-entity
+        gltf-model="#table-gltf"
+        id="tableBehindLeft"
+        position="-1.25 .5 .5"
+        rotation="0 90 0"
+        scale=".05 .05 .05"
+        shadow
+      >
+        <a-entity
+          gltf-model="#dinosaur-gltf"
+          id="smallDinosaurBehindLeft"
+          position="2 7.5 6"
+          rotation="0 -60 0"
+          scale=".01 .01 .01"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#pencil-gltf"
+          id="pencilBehindLeft"
+          position="-1 8 4"
+          rotation="0 -90 0"
+          scale=".5 .7 .5"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#notebook-gltf"
+          id="notebookBehindLeft"
+          position="-3 -1.5 -2"
+          rotation="0 -90 0"
+          scale="5 5 5"
+        ></a-entity>
+      </a-entity>
+      
+      <a-entity
+        gltf-model="#student-gltf"
+        id="studentBehindLeft"
+        position="5 -5.2 2"
+        rotation="0 180 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity>
+
+      <a-entity
+        gltf-model="#table-gltf"
+        id="tableBehind"
+        position="1.25 .5 .5"
+        rotation="0 90 0"
+        scale=".05 .05 .05"
+        shadow
+      >
+        <a-entity
+          gltf-model="#dinosaur-gltf"
+          id="smallDinosaurBehind"
+          position="2 7.5 6"
+          rotation="0 -60 0"
+          scale=".01 .01 .01"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#pencil-gltf"
+          id="pencilBehind"
+          position="-1 8 4"
+          rotation="0 -90 0"
+          scale=".5 .7 .5"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#notebook-gltf"
+          id="notebookBehind"
+          position="-3 -1.5 -2"
+          rotation="0 -90 0"
+          scale="5 5 5"
+        ></a-entity>
+      </a-entity>
+      
+            <a-entity
+        gltf-model="#student-gltf"
+        id="studentBehind"
+        position="6.25 -5.2 2"
+        rotation="0 180 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity>
+      
+              <a-entity 
+        gltf-model="#table-gltf"
+        id="tableBehindRight"
+        position="0 .5 .5"
+        rotation="0 90 0"
+        scale=".05 .05 .05"
+        shadow
+      >
+        <a-entity
+          gltf-model="#dinosaur-gltf"
+          id="smallDinosaurBehindRight"
+          position="2 7.5 6"
+          rotation="0 -60 0"
+          scale=".01 .01 .01"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#pencil-gltf"
+          id="pencilBehindRight"
+          position="-1 8 4"
+          rotation="0 -90 0"
+          scale=".5 .7 .5"
+          shadow
+        ></a-entity>
+        <a-entity
+          gltf-model="#notebook-gltf"
+          id="notebookBehindRight"
+          position="-3 -1.5 -2"
+          rotation="0 -90 0"
+          scale="5 5 5"
+        ></a-entity>
+      </a-entity>
+      
+            <a-entity
+        gltf-model="#student-gltf"
+        id="studentBehindRight"
+        position="7.5 -5.2 2"
+        rotation="0 180 0"
+        scale="5 5 5"
+        shadow
+      ></a-entity>
+
+      <a-plane
+        id="floor"
+        position="0 0 -1"
+        rotation="-90 0 0"
+        width="30"
+        height="50"
+        color="#999"
+        src="https://dinotoju.github.io/carpet.jpg"
+      ></a-plane>
+      <a-plane
+        id="front wall"
+        position="0 7 -10"
+        rotation="0 0 0"
+        width="50"
+        height="15"
+        color="#f5ebd0"
+      ></a-plane>
+      <a-plane
+        id="left wall"
+        position="-15 7 -1"
+        rotation="0 90 0"
+        width="50"
+        height="15"
+        color="#f5ebd0"
+      ></a-plane>
+      <a-plane
+        id="right wall"
+        position="15 7 -1"
+        rotation="0 -90 0"
+        width="50"
+        height="15"
+        color="#f5ebd0"
+      ></a-plane>
+            <a-plane
+        id="back wall"
+        position="0 7 6"
+        rotation="0 180 0"
+        width="50"
+        height="15"
+        color="#f5ebd0"
+      ></a-plane>
+
+      <a-camera position="0 1.6 0">
+        <a-cursor color="white"></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
