@@ -85,6 +85,15 @@
       </a-entity>
 
       <a-entity
+        gltf-model="#student-gltf"
+        id="student"
+        position="12.5 -11.4 1.6"
+        rotation="0 180 0"
+        scale="10 10 10"
+        shadow
+      ></a-entity>
+
+      <a-entity
         gltf-model="#table-gltf"
         id="tableRight"
         position="3 0 -.9"
@@ -98,6 +107,8 @@
           position="-1 8 4"
           rotation="0 -90 0"
           scale=".5 .7 .5"
+          event-set__enter="_event: mousedown; _target: #pencilRight; rotation: 90 -90 0; position: -1 11 4"
+          event-set__leave="_event: mouseup; _target: #pencilRight; rotation: 0 -90 0; position: -1 8 4"
           shadow
         ></a-entity>
         <a-entity
@@ -112,9 +123,9 @@
       <a-entity
         gltf-model="#student-gltf"
         id="studentRight"
-        position="7.5 -5.2 .35"
+        position="15.5 -11.4 1.6"
         rotation="0 180 0"
-        scale="5 5 5"
+        scale="10 10 10"
         shadow
       ></a-entity>
 
@@ -132,6 +143,8 @@
           position="-1 8 4"
           rotation="0 -90 0"
           scale=".5 .7 .5"
+          event-set__enter="_event: mousedown; _target: #pencilLeft; rotation: 90 -90 0; position: -1 11 4"
+          event-set__leave="_event: mouseup; _target: #pencilLeft; rotation: 0 -90 0; position: -1 8 4"
           shadow
         ></a-entity>
         <a-entity
@@ -146,9 +159,9 @@
       <a-entity
         gltf-model="#student-gltf"
         id="studentLeft"
-        position="5 -5.2 .35"
+        position="9.5 -11.4 1.6"
         rotation="0 180 0"
-        scale="5 5 5"
+        scale="10 10 10"
         shadow
       ></a-entity>
 
@@ -166,6 +179,8 @@
           position="-1 8 4"
           rotation="0 -90 0"
           scale=".5 .7 .5"
+          event-set__enter="_event: mousedown; _target: #pencilBehindLeft; rotation: 90 -90 0; position: -1 11 4"
+          event-set__leave="_event: mouseup; _target: #pencilBehindLeft; rotation: 0 -90 0; position: -1 8 4"
           shadow
         ></a-entity>
         <a-entity
@@ -180,9 +195,9 @@
       <a-entity
         gltf-model="#student-gltf"
         id="studentBehindLeft"
-        position="5 -5.2 2"
+        position="9.5 -11.4 4.1"
         rotation="0 180 0"
-        scale="5 5 5"
+        scale="10 10 10"
         shadow
       ></a-entity>
 
@@ -192,6 +207,8 @@
         position="3 0 1.5"
         rotation="0 90 0"
         scale=".1 .1 .1"
+        event-set__enter="_event: mousedown; _target: #pencilBehindRight; rotation: 90 -90 0; position: -1 11 4"
+          event-set__leave="_event: mouseup; _target: #pencilBehindRight; rotation: 0 -90 0; position: -1 8 4"
         shadow
       >
         <a-entity
@@ -210,13 +227,13 @@
           scale="7.5 5 7.5"
         ></a-entity>
       </a-entity>
-      
+
       <a-entity
         gltf-model="#student-gltf"
-        id="studentBehind"
-        position="6.25 -5.2 2"
+        id="studentBehindRight"
+        position="15.5 -11.4 4.1"
         rotation="0 180 0"
-        scale="5 5 5"
+        scale="10 10 10"
         shadow
       ></a-entity>
       
@@ -234,6 +251,8 @@
           position="-1 8 4"
           rotation="0 -90 0"
           scale=".5 .7 .5"
+          event-set__enter="_event: mousedown; _target: #pencilBehind; rotation: 90 -90 0; position: -1 11 4"
+          event-set__leave="_event: mouseup; _target: #pencilBehind; rotation: 0 -90 0; position: -1 8 4"
           shadow
         ></a-entity>
         <a-entity
@@ -244,13 +263,13 @@
           scale="7.5 5 7.5"
         ></a-entity>
       </a-entity>
-      
+
       <a-entity
         gltf-model="#student-gltf"
-        id="studentBehindRight"
-        position="7.5 -5.2 2"
+        id="studentBehind"
+        position="12.5 -11.4 4.1"
         rotation="0 180 0"
-        scale="5 5 5"
+        scale="10 10 10"
         shadow
       ></a-entity>
 
@@ -296,9 +315,12 @@
         color="#f5ebd0"
       ></a-plane>
 
-      <a-camera position="0 1.6 0">
-        <a-cursor color="white"></a-cursor>
-      </a-camera>
+      <a-entity id="rig" position="0 1.6 -3.5" rotation="0 180 0">
+        <a-entity id="camera" camera look-controls wasd-controls>
+          <a-cursor color="white"></a-cursor>
+        </a-entity>
+      </a-entity>
+
     </a-scene>
   </body>
 </html>
