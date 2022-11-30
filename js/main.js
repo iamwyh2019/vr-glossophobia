@@ -1,4 +1,8 @@
 const scene_root = document.querySelector('a-scene');
+const all_texts = [];
+
+// randomly choose one topic
+let cur_topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
 
 function load_assets() {
     const assets_root = document.createElement('a-assets');
@@ -31,6 +35,22 @@ function draw_scene() {
         for (let col = -1; col <= 1; col++) {
             const asset = ASSETS['blackboard'];
             const tag = create_tag(asset, row, col);
+
+            const text = document.createElement('a-text');
+            const textid = 'text-' + row + '-' + col;
+            all_texts.push(textid);
+            text.setAttribute('id', textid);
+            text.setAttribute('value', TOPICS[0]);
+            text.setAttribute('position', {x: 0, y: 0, z: 0.01});
+            text.setAttribute('rotation', {x: 0, y: 0, z: 0});
+            text.setAttribute('scale', {x: 0.05, y: 0.05, z: 0.05});
+            text.setAttribute('letter-spacing', 10);
+            text.setAttribute('color', 'white');
+            text.setAttribute('align', 'center');
+            text.setAttribute('width', 25);
+
+            tag.appendChild(text);
+
             scene_root.appendChild(tag);
         }
     }
@@ -64,3 +84,17 @@ function main() {
 }
 
 main();
+
+document.addEventListener('keyup',(e)=>{
+    if (e.keyCode === 32) {
+        let newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
+        while (newTopic === cur_topic) {
+            newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
+        }
+        cur_topic = newTopic;
+
+        for (let i = 0; i < all_texts.length; i++) {
+            document.getElementById(all_texts[i]).setAttribute('value', cur_topic);
+        }
+    }
+})
