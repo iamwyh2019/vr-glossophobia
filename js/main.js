@@ -21,7 +21,12 @@ function load_assets() {
 function create_tag(asset, row, col) {
     const tag = document.createElement('a-entity');
     tag.setAttribute('id', asset.name + '-' + row + '-' + col);
-    tag.setAttribute('gltf-model', `#${asset.id}`);
+    if (asset.src.endsWith('.gltf')) {
+        tag.setAttribute('gltf-model', `#${asset.id}`);
+    }
+    else if (asset.src.endsWith('.obj')) {
+        tag.setAttribute('obj-model', `obj: #${asset.id}; mtl: #${asset.id}-mtl`);
+    }
     tag.setAttribute('position', {x: asset.getX(row, col), y: asset.getY(row, col), z: asset.getZ(row, col)});
     tag.setAttribute('rotation', asset.rotation);
     tag.setAttribute('scale', asset.scale);
@@ -56,8 +61,8 @@ function draw_scene() {
     }
 
     // draw 2*5 tables, row 0~1, col -2~2
-    for (let row = 0; row <= 1; row++) {
-        for (let col = -2; col <= 2; col++) {
+    for (let row = 0; row <= 0; row++) {
+        for (let col = 0; col <= 0; col++) {
             const asset = ASSETS['table'];
             const tag = create_tag(asset, row, col);
 

@@ -36,13 +36,18 @@ const ASSETS = {
         scale: "7.5 5 7.5",
     },
     'student': {
-        id: 'student-gltf',
-        src: 'https://dinotoju.github.io/student/model.gltf',
-        getX: (row, col) => -30,
-        getY: (row, col) => -113,
-        getZ: (row, col) => 156,
+        id: 'student-obj',
+        //src: 'https://dinotoju.github.io/student/model.gltf',
+        src: './man1chair1/man.obj',
+        getX: (row, col) => -12,
+        getY: (row, col) => 0,
+        getZ: (row, col) => 0,
         rotation: "0 90 0",
-        scale: "125 100 125",
+        scale: ".5 .35 .5",
+    },
+    'student-mtl': {
+        id: 'student-obj-mtl',
+        src: './man1chair1/man.mtl',
     },
 }
 
