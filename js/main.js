@@ -1,6 +1,9 @@
 const scene_root = document.querySelector('a-scene');
 const all_texts = [];
 
+const peoplerow = [0,0];
+const peoplecol = [-1,1];
+
 // randomly choose one topic
 let cur_topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
 
@@ -61,8 +64,8 @@ function draw_scene() {
     }
 
     // draw 2*5 tables, row 0~1, col -2~2
-    for (let row = 0; row <= 0; row++) {
-        for (let col = 0; col <= 0; col++) {
+    for (let row = peoplerow[0]; row <= peoplerow[1]; row++) {
+        for (let col = peoplecol[0]; col <= peoplecol[1]; col++) {
             const asset = ASSETS['table'];
             const tag = create_tag(asset, row, col);
 
@@ -90,8 +93,60 @@ function main() {
 
 main();
 
+function studentRotate(targetPos) {
+    // animate each student's rotation
+    const duration = 400;
+    const interval = 10;
+    const steps = duration / interval;
+
+    // compute each student's rotation
+    for (let row = peoplerow[0]; row <= peoplerow[1]; row++) {
+        for (let col = peoplecol[0]; col <= peoplecol[1]; col++) {
+            const student = document.querySelector('#student-' + row + '-' + col);
+            const studentPos = student.object3D.getWorldPosition(new THREE.Vector3());
+            if (targetPos) {
+                const dx = targetPos.x - studentPos.x;
+                const dz = targetPos.z - studentPos.z;
+                const theta = -Math.atan2(dz, dx) * 180 / Math.PI;
+                student.setAttribute('rotate_', theta);
+            }
+            else {
+                student.setAttribute('rotate_', 0);
+            }
+
+            const rotation = student.getAttribute('rotation');
+            student.setAttribute('inity', rotation.y);
+        }
+    }
+
+    let step = 0;
+
+    // start the animation
+    const timer = setInterval(() => {
+        step++;
+        if (step > steps) {
+            clearInterval(timer);
+        }
+        else {
+            for (let row = peoplerow[0]; row <= peoplerow[1]; row++) {
+                for (let col = peoplecol[0]; col <= peoplecol[1]; col++) {
+                    const student = document.querySelector('#student-' + row + '-' + col);
+                    const rotate = parseFloat(student.getAttribute('rotate_'));
+                    const inity = parseFloat(student.getAttribute('inity'));
+                    const rotation = student.getAttribute('rotation');
+                    student.setAttribute('rotation', {
+                        x: rotation.x,
+                        y: inity + (rotate - inity) * step / steps,
+                        z: rotation.z,
+                    });
+                }
+            }
+        }
+    }, interval);
+}
+
 document.addEventListener('keyup',(e)=>{
-    if (e.keyCode === 32) {
+    if (e.key === ' ') {
         let newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
         while (newTopic === cur_topic) {
             newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
@@ -102,4 +157,12 @@ document.addEventListener('keyup',(e)=>{
             document.getElementById(all_texts[i]).setAttribute('value', cur_topic);
         }
     }
+    // when press c
+    else if (e.key === 'c') {
+        const camera = document.querySelector('#camera');
+        const camera_pos = camera.object3D.getWorldPosition(new THREE.Vector3());
+
+        studentRotate(camera_pos);
+    }
 })
+

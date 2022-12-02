@@ -5,7 +5,7 @@ const ASSETS = {
         getX: (row, col) => 5.75*col,
         getY: (row, col) => 3*row+1.8,
         getZ: (row, col) => -7.5,
-        rotation: "0 0 0",
+        rotation: {x: 0, y: 0, z: 0},
         scale: "4.5 4 5",
     },
     'table': {
@@ -14,7 +14,7 @@ const ASSETS = {
         getX: (row, col) => 2*col,
         getY: (row, col) => 0,
         getZ: (row, col) => 2.5*row-0.5,
-        rotation: "0 90 0",
+        rotation: {x: 0, y: 90, z: 0},
         scale: ".1 .1 .08",
     },
     'pencil': {
@@ -23,7 +23,7 @@ const ASSETS = {
         getX: (row, col) => -1,
         getY: (row, col) => 8,
         getZ: (row, col) => 4,
-        rotation: "0 -90 0",
+        rotation: {x: 0, y: -90, z: 0},
         scale: ".5 .7 .5",
     },
     'notebook': {
@@ -32,7 +32,7 @@ const ASSETS = {
         getX: (row, col) => -4.5,
         getY: (row, col) => -1.5,
         getZ: (row, col) => -4,
-        rotation: "0 -90 0",
+        rotation: {x: 0, y: -90, z: 0},
         scale: "7.5 5 7.5",
     },
     'student': {
@@ -42,7 +42,7 @@ const ASSETS = {
         getX: (row, col) => -12,
         getY: (row, col) => 0,
         getZ: (row, col) => 0,
-        rotation: "0 90 0",
+        rotation: {x: 0, y: 90, z: 0},
         scale: ".5 .35 .5",
     },
     'student-mtl': {
