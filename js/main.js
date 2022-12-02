@@ -93,9 +93,8 @@ function main() {
 
 main();
 
-function studentRotate(targetPos) {
+function studentRotate(targetPos, duration = 400) {
     // animate each student's rotation
-    const duration = 400;
     const interval = 10;
     const steps = duration / interval;
 
@@ -111,7 +110,10 @@ function studentRotate(targetPos) {
                 student.setAttribute('rotate_', theta);
             }
             else {
-                student.setAttribute('rotate_', 0);
+                // random rotation for each student
+                // [60, 120]
+                const theta = Math.random() * 60 + 60;
+                student.setAttribute('rotate_', theta);
             }
 
             const rotation = student.getAttribute('rotation');
@@ -166,3 +168,15 @@ document.addEventListener('keyup',(e)=>{
     }
 })
 
+// follow the camera in real time
+// const timer = setInterval(() => {
+//     const camera = document.querySelector('#camera');
+//     const camera_pos = camera.object3D.getWorldPosition(new THREE.Vector3());
+
+//     studentRotate(camera_pos);
+// }, 100);
+
+// every 10 seconds, rotate the students
+setInterval(() => {
+    studentRotate(null, 2500);
+}, 10000);
