@@ -111,8 +111,8 @@ function studentRotate(targetPos, duration = 400) {
             }
             else {
                 // random rotation for each student
-                // [60, 120]
-                const theta = Math.random() * 60 + 60;
+                // [55, 125]
+                const theta = Math.random() * 70 + 55;
                 student.setAttribute('rotate_', theta);
             }
 
@@ -147,6 +147,14 @@ function studentRotate(targetPos, duration = 400) {
     }, interval);
 }
 
+let randomTimer;
+function studentRandomMove(interval = 10000) {
+    randomTimer = setInterval(() => {
+        studentRotate(null, 2500);
+    }, interval);
+}
+studentRandomMove();
+
 document.addEventListener('keyup',(e)=>{
     if (e.key === ' ') {
         let newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
@@ -161,10 +169,14 @@ document.addEventListener('keyup',(e)=>{
     }
     // when press c
     else if (e.key === 'c') {
+        if (randomTimer)
+            clearInterval(randomTimer);
+
         const camera = document.querySelector('#camera');
         const camera_pos = camera.object3D.getWorldPosition(new THREE.Vector3());
-
         studentRotate(camera_pos);
+        
+        studentRandomMove();
     }
 })
 
@@ -175,8 +187,3 @@ document.addEventListener('keyup',(e)=>{
 
 //     studentRotate(camera_pos);
 // }, 100);
-
-// every 10 seconds, rotate the students
-setInterval(() => {
-    studentRotate(null, 2500);
-}, 10000);
