@@ -3,6 +3,6 @@
     "anywhere": "^1.6.0"
   },
   "scripts": {
-    "start": "anywhere -p 3000"
+    "start": "anywhere -p 3000 -s"
   }
 }
