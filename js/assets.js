@@ -38,7 +38,7 @@ const ASSETS = {
     'student': {
         id: 'student-obj',
         //src: 'https://dinotoju.github.io/student/model.gltf',
-        src: './man1chair1/man.obj',
+        src: 'https://iamwyh.com:5001/man1chair1/man.obj',
         getX: (row, col) => -12,
         getY: (row, col) => 0,
         getZ: (row, col) => 0,
@@ -47,7 +47,7 @@ const ASSETS = {
     },
     'student-mtl': {
         id: 'student-obj-mtl',
-        src: './man1chair1/man.mtl',
+        src: 'https://iamwyh.com:5001/man1chair1/man.mtl',
     },
 }
 

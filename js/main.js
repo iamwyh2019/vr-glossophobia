@@ -2,7 +2,7 @@ const scene_root = document.querySelector('a-scene');
 const all_texts = [];
 
 const peoplerow = [0,0];
-const peoplecol = [-1,1];
+const peoplecol = [-2,2];
 
 // randomly choose one topic
 let cur_topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
