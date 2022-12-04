@@ -2,7 +2,7 @@ const scene_root = document.querySelector('a-scene');
 const all_texts = [];
 
 const peoplerow = [0,0];
-const peoplecol = [0,0];
+const peoplecol = [-2,2];
 
 // randomly choose one topic
 let cur_topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
@@ -111,8 +111,8 @@ function studentRotate(targetPos, duration = 400) {
             }
             else {
                 // random rotation for each student
-                // [55, 125]
-                const theta = Math.random() * 70 + 55;
+                // [60, 120]
+                const theta = Math.random() * 60 + 60;
                 student.setAttribute('rotate_', theta);
             }
 
@@ -155,6 +155,9 @@ function studentRandomMove(interval = 10000) {
 }
 studentRandomMove();
 
+const attention = new Event('attention');
+let speechOn = false;
+
 document.addEventListener('keyup',(e)=>{
     if (e.key === ' ') {
         let newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
@@ -167,18 +170,29 @@ document.addEventListener('keyup',(e)=>{
             document.getElementById(all_texts[i]).setAttribute('value', cur_topic);
         }
     }
-    // when press c
-    else if (e.key === 'c') {
-        if (randomTimer)
-            clearInterval(randomTimer);
-
-        const camera = document.querySelector('#camera');
-        const camera_pos = camera.object3D.getWorldPosition(new THREE.Vector3());
-        studentRotate(camera_pos);
-        
-        studentRandomMove();
+    else if (e.key === 'v') {
+        if (!speechOn) {
+            recognition.addEventListener("end", recognition.start);
+            recognition.start();
+        }
+        else {
+            recognition.removeEventListener("end", recognition.start);
+            recognition.stop();
+        }
+        speechOn = !speechOn;
     }
-})
+});
+
+document.addEventListener('attention', (e) => {
+    if (randomTimer)
+        clearInterval(randomTimer);
+
+    const camera = document.querySelector('#camera');
+    const camera_pos = camera.object3D.getWorldPosition(new THREE.Vector3());
+    studentRotate(camera_pos);
+    
+    studentRandomMove();
+});
 
 // follow the camera in real time
 // const timer = setInterval(() => {
