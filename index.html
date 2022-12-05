@@ -64,10 +64,11 @@
         color="white"
       ></a-plane>
 
-      <a-entity id="rig" position="0 1.65 -4.35" rotation="0 180 0">
-        <a-entity id="camera" camera look-controls wasd-controls></a-entity>
+      <a-entity id="rig" rotation="0 180 0" position="0 0 -4.35">
+        <a-entity id="camera" position="0 1.65 0" camera look-controls wasd-controls></a-entity>
         <a-entity oculus-touch-controls="hand: left" ></a-entity>
-        <a-entity oculus-touch-controls="hand: right" oculus-thumbstick-controls></a-entity>
+        <a-entity oculus-touch-controls="hand: right"
+                  oculus-thumbstick-controls="adInverted: true; wsInverted: true;"></a-entity>
       </a-entity>
       
     </a-scene>

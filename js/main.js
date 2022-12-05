@@ -158,6 +158,18 @@ studentRandomMove();
 const attention = new Event('attention');
 let speechOn = false;
 
+function changeSpeech() {
+  if (!speechOn) {
+      recognition.addEventListener("end", recognition.start);
+      recognition.start();
+  }
+  else {
+      recognition.removeEventListener("end", recognition.start);
+      recognition.stop();
+  }
+  speechOn = !speechOn;
+}
+
 document.addEventListener('keyup',(e)=>{
     if (e.key === ' ') {
         let newTopic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
@@ -171,15 +183,7 @@ document.addEventListener('keyup',(e)=>{
         }
     }
     else if (e.key === 'v') {
-        if (!speechOn) {
-            recognition.addEventListener("end", recognition.start);
-            recognition.start();
-        }
-        else {
-            recognition.removeEventListener("end", recognition.start);
-            recognition.stop();
-        }
-        speechOn = !speechOn;
+        changeSpeech();
     }
 });
 
